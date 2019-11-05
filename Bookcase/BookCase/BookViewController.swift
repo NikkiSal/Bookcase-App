@@ -12,6 +12,8 @@ class BookViewController: UIViewController {
     
     @IBOutlet weak var bookCover: UIImageView!
     @IBOutlet weak var isbnStackView: UIStackView!
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +37,15 @@ class BookViewController: UIViewController {
                 offset = frMaxY - keyboardFrame.origin.y
             }
         }
+        UIView.animate(withDuration:duration,
+                       delay: 0,
+                       options: UIView.AnimationOptions(rawValue: curve),
+                       animations: {
+                        self.topConstraint.constant = -offset //negative direction
+                        self.bottomConstraint.constant = offset
+                        self.view.layoutIfNeeded()
+        },
+                       completion: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
