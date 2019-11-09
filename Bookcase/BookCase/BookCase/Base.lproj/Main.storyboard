@@ -39,6 +39,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="show" id="SFP-83-NBK"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -265,11 +268,14 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OYJ-ga-lY2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="944.79999999999995" y="115.59220389805098"/>
+            <point key="canvasLocation" x="996" y="536"/>
         </scene>
     </scenes>
     <resources>
         <image name="book.png" width="280.32000732421875" height="174.24000549316406"/>
         <image name="star.png" width="73.44000244140625" height="73.919998168945312"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="SFP-83-NBK"/>
+    </inferredMetricsTieBreakers>
 </document>

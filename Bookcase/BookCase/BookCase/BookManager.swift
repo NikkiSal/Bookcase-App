@@ -25,6 +25,14 @@ class BooksManager {
         books.append(book)
     }
     
+    func updateBook(at index:Int, with book:Book) {
+        books[index] = book
+    }
+    
+    func removeBooks(at index:Int) {
+        books.remove(at: index)
+    }
+    
     private func sampleBooks() ->[Book] {
         return [
             Book(title: "Great Expectations", author: "Charles Dickes", rating: 5, isbn: "97454545345", notes: " gift from papa"),

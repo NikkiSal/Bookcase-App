@@ -21,11 +21,19 @@ class BookViewController: UIViewController {
     @IBOutlet weak var notesTextView: UITextView!
     
     weak var delegate:BookViewControllerDelegate?
+    var book:Book?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // you can put an infoButton and make the isbn isHidden here
+        
+        if let book = book {
+            bookCover.image = book.cover
+            titleTextField.text = book.title
+            authorTextField.text = book.author
+            isbnTextField.text = book.isbn
+            notesTextView.text = book.notes
+            navigationItem.title = "Edit book" // because add book doesn't make sense now
+        }
     }
     @IBAction func touchCancel(_ sender: Any) {
         dismissMe()
@@ -42,7 +50,13 @@ class BookViewController: UIViewController {
     }
     
     func dismissMe() {
-        dismiss(animated: true, completion: nil) // a viewController cn request itself to be dismissed with this method
+        if presentingViewController != nil {
+            //was presented via modal segue
+            dismiss(animated: true, completion: nil) // a viewController can request itself to be dismissed with this method
+        } else {
+            // was pushed onto navigation stack
+            navigationController!.popViewController(animated: true)
+        }
     }
     
     
