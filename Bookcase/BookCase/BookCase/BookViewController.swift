@@ -4,6 +4,10 @@
 
 import UIKit
 
+protocol BookViewControllerDelegate: AnyObject { //AnyObject defines the protocol as classonly
+    func saveBook(_ book:Book)
+}
+
 class BookViewController: UIViewController {
     
     @IBOutlet weak var bookCover: UIImageView!
@@ -11,10 +15,34 @@ class BookViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var outerStackView: UIStackView!
     
+    @IBOutlet weak var titleTextField: UITextField!
+    @IBOutlet weak var authorTextField: UITextField!
+    @IBOutlet weak var isbnTextField: UITextField!
+    @IBOutlet weak var notesTextView: UITextView!
+    
+    weak var delegate:BookViewControllerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // you can put an infoButton and make the isbn isHidden here
+    }
+    @IBAction func touchCancel(_ sender: Any) {
+        dismissMe()
+    }
+    
+    @IBAction func touchSave(_ sender: Any) {
+        let bookToSave = Book(title: titleTextField.text!,
+                              author: authorTextField.text!,
+                              rating: 3,
+                              isbn: isbnTextField.text!,
+                              notes: notesTextView.text!)
+        delegate?.saveBook(bookToSave)
+        dismissMe()
+    }
+    
+    func dismissMe() {
+        dismiss(animated: true, completion: nil) // a viewController cn request itself to be dismissed with this method
     }
     
     

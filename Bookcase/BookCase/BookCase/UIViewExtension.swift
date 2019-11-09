@@ -2,7 +2,6 @@
 //  UIViewExtension.swift
 //  BookCase
 //
-//  Created by Marzieh on 2019-11-02.
 //  Copyright © 2019 Myph. All rights reserved.
 //
 

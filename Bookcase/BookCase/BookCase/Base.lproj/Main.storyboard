@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Pca-eL-0dn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dAi-Ca-neX">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Books Table View Controller-->
+        <!--Books-->
         <scene sceneID="r0h-4P-FwC">
             <objects>
                 <tableViewController id="Pca-eL-0dn" customClass="BooksTableViewController" customModule="BookCase" customModuleProvider="target" sceneMemberID="viewController">
@@ -46,12 +46,19 @@
                             <outlet property="delegate" destination="Pca-eL-0dn" id="YiX-Vi-IVn"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Books" id="SBU-Bq-27N">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="ShN-HT-wr2">
+                            <connections>
+                                <segue destination="T2F-31-Vf7" kind="presentation" modalPresentationStyle="fullScreen" id="sPk-Ff-eoV"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y8f-bi-rnv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-586" y="117"/>
+            <point key="canvasLocation" x="138" y="116"/>
         </scene>
-        <!--Book View Controller-->
+        <!--Add book-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="BookViewController" customModule="BookCase" customModuleProvider="target" sceneMemberID="viewController">
@@ -197,16 +204,68 @@
                             </mask>
                         </variation>
                     </view>
+                    <navigationItem key="navigationItem" title="Add book" id="2XL-n6-vik">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="6EQ-Ol-2TQ">
+                            <connections>
+                                <action selector="touchCancel:" destination="BYZ-38-t0r" id="gqH-ej-9DR"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="TcM-on-6nL">
+                            <connections>
+                                <action selector="touchSave:" destination="BYZ-38-t0r" id="7F7-Yj-hdI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="authorTextField" destination="MHY-ln-3Dt" id="Q7o-wG-x4k"/>
                         <outlet property="bookCover" destination="XUC-rh-6Dw" id="7Yo-8u-bEa"/>
                         <outlet property="isbnStackView" destination="kEO-vu-yRv" id="b2A-5N-nMr"/>
+                        <outlet property="isbnTextField" destination="S5J-x4-eEf" id="Hib-M4-0K9"/>
+                        <outlet property="notesTextView" destination="nEU-m0-fG4" id="f0x-Mw-BwC"/>
                         <outlet property="outerStackView" destination="lMf-lq-GCt" id="w20-Hb-jWk"/>
                         <outlet property="scrollView" destination="fYc-Zy-eG0" id="1St-Lt-hT2"/>
+                        <outlet property="titleTextField" destination="BHd-6E-8eN" id="Hdy-2R-AsL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="135.9375" y="117.39130434782609"/>
+            <point key="canvasLocation" x="1884" y="115.59220389805098"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Ckq-sr-0Jh">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dAi-Ca-neX" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bgs-Ku-1GI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Pca-eL-0dn" kind="relationship" relationship="rootViewController" id="4y0-do-5MW"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pd5-Bs-Fnp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-586.39999999999998" y="116.49175412293854"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="NEW-XO-6ID">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="T2F-31-Vf7" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Jop-ur-D7k">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="0fk-bB-pzq"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OYJ-ga-lY2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="944.79999999999995" y="115.59220389805098"/>
         </scene>
     </scenes>
     <resources>

@@ -2,7 +2,6 @@
 //  BooksTableViewController.swift
 //  BookCase
 //
-//  Created by Marzieh on 2019-11-06.
 //  Copyright © 2019 Myph. All rights reserved.
 //
 
@@ -81,14 +80,23 @@ class BooksTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) { //because the segue was setup in InterfaceBuilder, the instantiated of the new viewcontroller was done automatically, so we don't have a reference to this new viewController. Good thing is that view controllers have a method
+        // this is called when any new viewcontrollers are instantiated but before the segue is performed.
+        if let navContorller = segue.destination as? UINavigationController, //the destination property is the detination view controller for the segue, this destination property will be the navigation controller because the viewcontroller is in the navigation controller
+            let viewController = navContorller.topViewController as? BookViewController { //navigation controllers have a property called the topViewController that contain the first view controller in a stack and this is our bookViewController
+            viewController.delegate = self
+        }
+        
     }
-    */
+    
+}
 
+extension BooksTableViewController:BookViewControllerDelegate {
+    func saveBook(_ book:Book) {
+        booksManager.addBook(book)
+        tableView.reloadData() // update the table
+    }
 }

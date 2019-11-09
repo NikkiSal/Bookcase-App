@@ -2,7 +2,6 @@
 //  BookManager.swift
 //  BookCase
 //
-//  Created by Marzieh on 2019-11-06.
 //  Copyright © 2019 Myph. All rights reserved.
 //
 
@@ -20,6 +19,10 @@ class BooksManager {
     
     private func loadBooks() -> [Book] {
         return sampleBooks()
+    }
+    
+    func addBook(_ book:Book) {
+        books.append(book)
     }
     
     private func sampleBooks() ->[Book] {

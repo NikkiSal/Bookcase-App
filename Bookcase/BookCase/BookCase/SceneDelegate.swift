@@ -1,8 +1,6 @@
 //
 //  SceneDelegate.swift
 //  BookCase
-//
-//  Created by Marzieh on 2019-10-29.
 //  Copyright © 2019 Myph. All rights reserved.
 //
 
