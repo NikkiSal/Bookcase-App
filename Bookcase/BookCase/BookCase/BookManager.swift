@@ -13,19 +13,29 @@ enum SortOrder: Int {
     case isbn
 }
 
+// now we need a delegate because we have the timer, so now the BooksManager will now need to notify the BooksTableViewController when the data has been filtered
+protocol BooKsManagerDelegate:AnyObject {
+    func filtered()
+    
+}
+
 class BooksManager {
     
     private lazy var books = loadBooks() // lazy stored property because it's an instance method
     private var filteredBooks:[Book] = []
-    
+    weak var delegate:BooKsManagerDelegate?
     var sortOrder:SortOrder = .title {
         didSet {
             sort(books: &books)
         }
     }
+    // if you don't want to filter after each keystroke, use timer to delay the call to the filter method    var timer: Timer?
+    var timer: Timer?
     var searchFilter = "" {
         didSet {
-            filter()
+            //filter()
+            timer?.invalidate() // if there is already a timer, we should cancel
+            timer = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(filter), userInfo: nil, repeats: false)
         }
     }
     
@@ -89,10 +99,11 @@ class BooksManager {
         sort(books: &books)
         return books
     }
-    func filter () {
+    @objc func filter () {
         filteredBooks = books.filter { book in
             return book.title.localizedLowercase.contains(searchFilter.localizedLowercase) || book.author.localizedLowercase.contains(searchFilter.localizedLowercase)
         }
+        delegate?.filtered()
     }
     
     func sort(books:inout [Book]) {

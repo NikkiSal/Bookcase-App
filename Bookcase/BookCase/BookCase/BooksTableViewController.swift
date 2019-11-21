@@ -16,6 +16,7 @@ class BooksTableViewController: UITableViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        booksManager.delegate = self
         searchController.searchResultsUpdater = self
         // we don't want the background to go grey when we are searching, and the user should be able to edit the rows during search
         searchController.obscuresBackgroundDuringPresentation = false
@@ -146,6 +147,13 @@ extension BooksTableViewController:UISearchResultsUpdating {
         guard let searchText = searchController.searchBar.text else {return}
         // now pass this text to the searchfilter property in BooksManager
         booksManager.searchFilter = searchText
+       // tableView.reloadData() // if there was no timer
+    }
+}
+
+// for timer
+extension BooksTableViewController:BooKsManagerDelegate {
+    func filtered() {
         tableView.reloadData()
     }
 }
