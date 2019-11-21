@@ -10,16 +10,24 @@ import UIKit
 class BooksTableViewController: UITableViewController {
     
     var booksManager = BooksManager()
-
+    
+    // we're going to display the results in the same view controller therefore pass nil
+    let searchController = UISearchController(searchResultsController: nil)
+   
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-    }
+        searchController.searchResultsUpdater = self
+        // we don't want the background to go grey when we are searching, and the user should be able to edit the rows during search
+        searchController.obscuresBackgroundDuringPresentation = false
+         
+        // that means in the booksedit scene, the search bar is no longer present
+        definesPresentationContext = true
+        if #available(iOS 11.0, *){
+            self.navigationItem.searchController = searchController
+        } else {
+            tableView.tableHeaderView = searchController.searchBar
+            }
+        }
 
     // MARK: - Table view data source
 
@@ -117,7 +125,6 @@ class BooksTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    
 }
 
 extension BooksTableViewController:BookViewControllerDelegate {
@@ -130,5 +137,15 @@ extension BooksTableViewController:BookViewControllerDelegate {
             booksManager.addBook(book)
         }
         tableView.reloadData() // update the table
+    }
+}
+
+extension BooksTableViewController:UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        // get the text in the searchbar
+        guard let searchText = searchController.searchBar.text else {return}
+        // now pass this text to the searchfilter property in BooksManager
+        booksManager.searchFilter = searchText
+        tableView.reloadData()
     }
 }

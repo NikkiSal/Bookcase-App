@@ -3,7 +3,7 @@
 //  BookCase
 
 import UIKit
-struct Book {
+struct Book:Equatable {
     static let defaultCover = UIImage(named: "book.png")!// we already have a default image stored
     var title:String
     var author:String
